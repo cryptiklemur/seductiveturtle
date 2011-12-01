@@ -1,6 +1,0 @@
-<?php
-if (isset($this->content)) {
-    $content=$this->content;
-    echo $content;
-}
-?>

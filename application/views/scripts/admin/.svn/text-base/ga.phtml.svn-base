@@ -1,2 +1,0 @@
-
-<?php echo $this->flot_data_visits; ?>_<?php echo $this->flot_data_views; ?>

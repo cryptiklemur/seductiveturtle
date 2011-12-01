@@ -1,5 +1,0 @@
-<?php
-header('Content-type: text/css');
-$css = Bootstrap::getDataS('template','template_section = "custom"');
-echo stripslashes($css->template_current_value);
-?>

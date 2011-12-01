@@ -1,0 +1,37 @@
+SetEnv APPLICATION_ENV production
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType text/html "access plus 1 seconds"
+ExpiresByType image/gif "access plus 2 years"
+ExpiresByType image/jpeg "access plus 2 years"
+ExpiresByType image/png "access plus 2 years"
+ExpiresByType text/css "access plus 2 years"
+ExpiresByType text/javascript "access plus 2 years"
+ExpiresByType application/x-shockwave-flash "access plus 2 years"
+ExpiresByType application/javascript "access plus 2 years"
+ExpiresByType application/x-javascript "access plus 2 years"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+Options +FollowSymLinks
+Options -Indexes
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d 
+RewriteRule .* - [L]
+
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+
+RewriteRule ^.*$ - [NC,L]
+RewriteRule \.svn/.* index.php [L]
+RewriteRule ^sitemap.xml$ /sitemap/index [r=301,NC,L]
+RewriteRule ^.*$ index.php [NC,L]
+
+
+rewritecond %{http_host} ^seductiveturtle.com [nc]
+rewriterule ^(.*)$ http://www.seductiveturtle.com/$1 [r=301,nc] 
+
+</IfModule>
