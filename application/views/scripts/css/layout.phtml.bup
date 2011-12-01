@@ -1,0 +1,284 @@
+<?php
+header('Content-type: text/css');
+$color1 = Bootstrap::getConfig('theme','color_one');
+$color2 = Bootstrap::getConfig('theme','color_two');
+$color3 = Bootstrap::getConfig('theme','color_three');
+$color4 = Bootstrap::getConfig('theme','color_four');
+$color5 = Bootstrap::getConfig('theme','color_five');
+$colors = Bootstrap::getDataM('template');
+$body = array();
+$header = array();
+$content = array();
+$footer = array();
+foreach($colors as $color) {
+	if($color->template_section == 'body') {
+		if($color->template_name == 'background')
+			$body['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$body['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$body['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$body['link_hover'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'header') {
+		if($color->template_name == 'color')
+			$color3 = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$color4 = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$color7 = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'content') {
+		if($color->template_name == 'background')
+			$content['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$content['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$content['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$content['link_hover'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'footer') {
+		if($color->template_name == 'background')
+			$footer['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$footer['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$footer['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$footer['link_hover'] = stripslashes($color->template_current_value);
+	}
+}
+?>
+/*GLOBAL*/
+
+* 	{ margin:0; padding: 0;  }
+html { height:100%; }
+body 	{ background:<?=$body['background']?>; height: 100%; width: 100%; font-family: arial, helvetica, sans-serif; color: <?=$body['color']?>;  }
+h2 	{ margin-top: 13px; color: <?=$color2?>; font-size: 24px; font-weight: bold; }
+h3	{ color: <?=$color3?>; }
+.hr 	{ margin-bottom:10px; }
+img 	{ border:none; }
+body a	{ color: <?=$body['link']?>; text-decoration:none; cursor:pointer;}
+body a:hover	{ text-decoration:underline; color: <?=$body['link_hover']?>;}
+.left { float:left; }
+.right { float:right; }
+
+/* Form */
+
+label { color: <?=$color2?>; padding: 2px; float:left;}
+input	{ -moz-border-radius: 10px; -webkit-border-radius: 10px; border: none; height: auto; width: 170px; font-weight: bold; padding: 3px; background: <?=$color4?>; outline:none;}
+textarea {-moz-border-radius: 10px; -webkit-border-radius: 10px; border: none; background: <?=$color4?>; outline:none;}
+textarea:hover,input:hover	{ outline:none;}
+textarea:focus,input:focus,textarea:active,input:active { background:<?=$color3?>; outline:none;}
+select	{ background: <?=$color4?>; border: 2px solid <?=$color1?>; height: 25px; width: 150px; font-weight: bold; padding: 5px 0 0 5px;}
+option	{ background: <?=$color4?>; height: 25px; width: 150px; font-weight: bold; padding: 5px 0 0 5px;}
+.form	 { padding-top: 40px; width:800px; height:auto;}
+.fields	 { border:none; }
+.fields legend { display:none; }
+.fields p { display:none; }
+.fieldDesc { font-size: .8em; color:<?=$color4?>; }
+.fields label { color: <?=$color2?>; padding: 2px; float:left;}
+.fields input	{ padding: 5px 0 0 5px; margin-bottom: 12px;  padding: 3px; float:right;}
+.fields select	{ padding: 3px 0 0 5px; float:right; }
+.fields option	{  height: 80px; width: 180px; font-weight: bold; padding: 9px 0 0 5px; float:right; }
+.fields input[type=radio] { float:right; }
+.fields input:disabled { color: #FFFFFF; background: #999999; }
+input[type='submit']:hover { border:none; }
+
+
+
+/*WHAT WE DO FADER*/
+
+#page2_content { height: 250px; width: 800px; margin-top: 35px;}
+#page2_content h1 	{ display: none; }
+#our_work_fader 	{height:100px; width:900px;margin-top:50px;}
+.test { margin:3px; color: <?=$color2?>;display:none; height:40px; float:left; font-size:1.8em; font-weight:bold;padding-right:40px;}
+#fadeinlast {color: <?=$color2?>; height: 500px;}
+#page2_bottom div 	{ display:none;}
+#tmpSlide-2 img 	{ width: 280px; height:88px;}
+
+
+
+/*HEADER*/
+
+#head_wrap { height:100px;}
+#head_wrap a { color:<?=$color4?>; }
+#head_wrap a:hover { color:<?=$color7?>; }
+#header {  }
+#logo 	{ line-height:250%; }
+#logo:hover 	{ }
+#logo h1 { color:#ffffff; font-size: 1.2em; text-align:center;}
+ul#mainnav { list-style-type:none; z-index: 999;}
+#mainnav { width:555px; position: fixed; top:180px; right:0px; padding-top: 3px; }
+#mainnav li {padding-top: 13px; font-size: 15px; font-weight: bold; }
+#home {}
+#what {margin-left:25px;}
+#work {margin-left:60px;}
+#quote {margin-left:90px;}
+#contact {margin-left:120px;}
+#admin {margin-left:150px;}
+#admindash {}
+#log {margin-left: 25px;}
+#useredit {margin-left: 60px;}
+#adminpage {margin-left: 90px;}
+#template {margin-left: 120px;}
+
+
+
+/*CONTENT*/
+#left_gradient { background: url('/includes/images/gradient_left.png') no-repeat; position: absolute; z-index: 100 !important; height: 296px; width: 100px;}
+#right_gradient 	{ background: url('/includes/images/gradient_right.png') no-repeat; position: absolute; z-index: 100 !important; height: 296px; width: 100px; margin-left: 900px; }
+#content  { min-height:100%; width:800px; height:auto !important; height: 100%; margin: 0 auto -150px; color: <?=$content['color']?>; background:<?=$content['background']?>; }
+#content a { color:<?=$content['link']?>; }
+#content a:hover { color:<?=$content['link_hover']?>; }
+
+
+
+/*FOOTER*/
+.push			{ height: 150px; width:800px;}
+#foot_wrap     	{ margin:0 auto; width:800px; height: 150px; background:<?=$footer['background']?>; color:<?=$footer['color']?>;}
+#foot_wrap a { color:<?=$footer['link']?>; }
+#foot_wrap a:hover { color:<?=$footer['link_hover']?>; }
+#footer_nav	{padding-top:20px; width:800px; }
+#footer_nav ul {list-style:none;}
+#footer_nav li{display:inline; text-align:right;; }
+#footer_text{padding-top:20px; width:800px; }
+.padded_li 	{padding-right:10px;}
+
+/*PAGE ONE*/
+
+#page1_content { overflow-y: hidden; width: 800px; margin-top: 35px; }
+#page1_right {  width: 563px; color: #999898; font-size: 14px; font-weight: normal; line-height: 18px; }
+#page1_content h1 	{ display: none; }
+
+/*FADE MODULE*/
+
+#tmpSlide-3     {  }
+#tmpSlideshow { position: relative; height: 320px; width: 650px; margin: 0px; }
+#tmpSlideshowControls { position: absolute; height: 16px; width: 64px; margin-top: 5px; top: 0px; right: 0px; }
+.tmpSlide 	{ color: #474645;position: absolute; display: none; height: 280px; width: 650px; top: 35px; left: 0; }
+.tmpSlide img { height: 204px; width: 345px; float: left;}
+.tmpSlideshowControl 	{ background: #fff; height: 15px; width: 15px; float: left; margin: 2px; border: 1px solid <?=$color4?>; cursor: pointer; }
+.tmpSlideshowControl:hover { border: 1px solid <?=$color2?>;}
+.tmpSlideshowControl span { vertical-align: middle; line-height: 36px;}
+.tmpSlideshowControlOn 	{ background-image: url('/Template/Pictures/Buttons/FeatureOver.png'); }
+.tmpSlideshowControlActive { color: #fff; border: 1px solid <?=$color2?>; }
+.tmpSlideCopy { position: absolute; width: 170px; left: 565px; top: 20px; }
+
+
+
+
+/*PAGE THREE*/
+
+#page3_content {  width: 800px; margin-top: 25px;}
+#page3_content h1 	{ display: none;}
+.work_module { background: url('/includes/images/work_module.png') no-repeat; height: 44px; width: 251px; float: left; margin-right: 15px; margin-bottom: 10px; }
+.work_module h3 	{ margin-top: 8px; margin-left: 55px; color: <?=$color2?>; font-size: 18px; font-weight: bold; line-height: 14px; }
+.work_module a { margin-left: 55px; font-size: 14px; font-weight: bold; }
+
+
+
+
+
+/*CONTACT PAGE*/
+
+#page4_content { height: 219px; width: 800px; margin-top: 35px;}
+#page4_left { float: left; width: 535px; color: <?=$color2?>; font-size: 12px; font-weight: normal; }
+#page4_left img{  border: none; }
+#page4_right { height: 223px; width: 242px; float: right;  }
+#page4_content h1 	{ display: none;}
+input#math		{width:219px; margin-bottom:5px;}	
+div.submit_button {background:transparent url('/includes/images/submit_button.png') no-repeat scroll 0 0;}
+#contact_button { margin:50px 0 0 120px; width:116px; height:40px;}
+#mathWrong		{color:red;height:10px; width:30px; padding-left:5px;}
+
+
+/*CONTACT FORM*/
+
+#contact_module { background: <?=$color1?>; height: 165px; width: 533px; }
+#form_left { width: 244px; float: left; margin-top: 7px; padding-left: 10px; }
+#form_right 	{ width: 231px; float: left; margin-top: 7px; padding-left: 25px; }
+#header_module 	{ height: 57px; width: 535px; }
+#header_module p { height: 30px; float: left; margin-top: 6px; margin-left: 10px; }
+.contact .input { padding:0; float:none; height: 23px; width: 235px; margin-bottom: 3px; padding-top: 3px; padding-left: 5px; }
+.submit_button 	{ height:26px; width:115px; margin-top: 15px; border:medium none; cursor:pointer; }
+.submit_button:hover 	{ background-position: -116px 0;}
+.contact label { float:none; padding: 0; }
+
+
+
+
+
+
+
+
+
+/*RANDOM*/
+
+.vspacer { height: 9px; }
+.vspacer1 { height: 13px; }
+.vspacer2 { height: 4px; }
+.vspacer3 { height: 17px; }
+.vspacer4 { height: 40px; }
+.vspacer5 { height: 25px; }
+
+
+/*FORM VALIDATION*/
+
+span.status{ clear:right; height:19px; width:19px; float:left; margin-left:8px; border: 1px solid #ccc; }
+.textareaRequiredState span.status,
+.textfieldRequiredState span.status,
+.textfieldInvalidFormatState span.status,
+.textfieldMinCharsState span.status,
+.textfieldMaxCharsState span.status,
+.selectRequiredState span.status 	{ clear:right; height:19px; width:19px; float:left; margin-left:8px; border: 2px solid #ff0000; }
+.textareaValidState span.status,
+.textfieldValidState span.status,
+.selectValidState span.status { clear:right; height:19px; width:19px; float:left; margin-left:8px; border: 2px solid #00ff00; }
+.label 	{ float:left; font-size:11px; }
+.textareaRequiredState .label,
+.textfieldRequiredState .label,
+.textfieldInvalidFormatState .label,
+.textfieldMinCharsState .label,
+.textfieldMaxCharsState .label,
+.selectRequiredState .label{ float:left; font-size:11px; color:red; }
+.field 	{ width:235px; margin-right:10px; }
+.hidden_field { width:300px; margin-right:10px; display:none; }
+.input 	{ clear:right; width:235px; float:left; border: 2px solid #ccc; }
+.input2 { width: 231px; height: 71px; padding-top: 3px; padding-left: 5px; border: 2px solid <?=$color4?>; }
+.textareaRequiredState .input,
+.textfieldRequiredState .input,
+.textfieldInvalidFormatState .input,
+.textfieldMinCharsState .input,
+.textfieldMaxCharsState .input,
+.selectRequiredState .input{ width:235px; float:left; border:solid 2px red; }
+.textareaRequiredState .input2,
+.textfieldRequiredState .input2,
+.textfieldInvalidFormatState .input2,
+.textfieldMinCharsState .input2,
+.textfieldMaxCharsState .input2,
+.selectRequiredState .input2{ width:235px; float:left; border:solid 2px red; }
+.combobox { clear:right; width:100px; float:left; }
+.submit { margin-left:12em; }
+.clear 	{ clear:both; visibility:hidden; height:0; width:0; margin: 0; padding: 0; }
+
+.page_head h3 { color: <?=$color2?>; }
+.group1 { float:left; width:350px; }
+.group2 { float:right; width:350px; }
+.group3 { clear:both; margin-top:35px; }
+#user_signature-element { clear:both; }
+#content-element { clear:both; }
+
+
+.faqWrap	{padding-top:30px; width:600px;}
+.faqWrap .faq_item { width:600px;  margin-left: 25px;}
+.faqWrap .content	{ width:600px;  padding:5px;}
+.faqWrap .faqAdmin 	{ width:600px; margin-bottom:5px; }
+.faqWrap img{ border:none; }
+.faqWrap .title{ font-weight: bold; padding: 5px 0 0 5px; margin-bottom: 12px;  font-size: 1.1em;}
+.faqWrap li	{ font-weight: bold; font-size: 1.1em;  color: <?=$color2?>;}
+#faq_title{ width:400px; }
+
+#browser  { border-bottom:1px solid <?=$color2?>;border-right:1px solid <?=$color2?>; background:<?=$color1?>; padding:10px 20px; position:fixed; top:0; left:0; z-index:2000; }

@@ -1,0 +1,10 @@
+<?php 
+$preview = $this->preview;
+$id = $this->id;
+$referer = $this->referer; 
+?>
+
+<div class="restore_buttons">
+<a href="/backup/restore/id/<?=$id?>/referer/<?=$referer?>">Restore</a> | <a href='<?=$referer?>'>Close</a>
+</div>
+<?=$preview?>

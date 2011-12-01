@@ -1,0 +1,48 @@
+<?php
+$_f = $this->pageForm;
+?>
+<div id='comment_form_wrap'>
+	<form action="<?php echo $_f->getAction(); ?>"
+                method="<?php echo $_f->getMethod(); ?>"
+                id="form-validate"
+        >
+                <?php
+                $groups = $_f->getDisplayGroups();
+                foreach($groups as $group) {
+                ?>
+                        <fieldset class="<?php echo $group->getAttrib('class'); ?>">
+                        	
+                           		<legend>
+                                	<a href='#' onclick='$j("div[section=\"<?=$group->getAttrib("id");?>\"]").toggle("slow")'><h3><?php echo ucwords($group->getLegend()); ?></h3></a>
+                            	</legend>
+                            
+                                <div section="<?=$group->getAttrib('id');?>" style='display:none;'>
+	                                <?php
+	                                $elements = $group->getElements();
+	                                foreach($elements as $element) { ?>
+	                                        <div section='<?=$element->getName()?>'>
+	                                        	<?php echo $element->render(); ?>
+	                                        	<div class="clear"></div>
+	                                        </div>
+	                                <?php
+	                                }
+	                                ?>
+                                </div>
+                        </fieldset>
+            <?php
+                }
+                ?>
+            <br/>
+</form>
+</div>
+<script type="text/javascript">
+document.getElementById('backup__enabled-true').onclick = function () {
+	$j('#backup__keep_record').show('slow')
+}
+document.getElementById('backup__enabled-false').onclick = function () {
+	$j('#backup__keep_record').hide('slow')
+}
+if($j('#backup__enabled-false').is(':checked')) {
+	$j('#backup__keep_record').hide();
+}
+</script>

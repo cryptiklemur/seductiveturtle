@@ -1,0 +1,51 @@
+<?php
+if(isset($this->form)) {
+$_f = $this->form;
+?>
+<div class="page-head">
+    <h3><?php echo str_replace("_"," ",$_f->getName()); ?></h3>
+</div>
+<br/>
+<div class="negMargin">
+        <form action="<?php echo $_f->getAction(); ?>"
+                method="<?php echo $_f->getMethod(); ?>"
+                id="form-validate"
+        >
+                <?php
+                $groups = $_f->getDisplayGroups();
+                foreach($groups as $group) {
+                ?>
+                    <div class="fieldset_bg_head">
+                    </div>
+                    <div class="fieldset_bg_body">
+                        <fieldset class="fields regField">
+                            <legend>
+                                                <?php echo $group->getLegend(); ?>
+                            </legend>
+                                        <div class="clear"></div>
+                                        <?php
+                                        $elements = $group->getElements();
+                                        foreach($elements as $element) { ?>
+                                    <p>
+                                                        <?php echo $element->render(); ?>
+                                    </p>
+                                        <?php
+                                        }
+                                        ?>
+                        </fieldset>
+                    </div>
+                    <div class="fieldset_bg_foot">
+                    </div>
+            <?php
+                }
+                ?>
+            <br/>
+                <?php echo $_f->getElement('submit')->render(); ?>
+</form>
+<script>
+        document.getElementById('recaptcha_reload').src = "/images/captcha/refresh.jpg";
+        document.getElementById('recaptcha_switch_audio').src = "/images/captcha/audio.jpg";
+        document.getElementById('recaptcha_whatsthis').src = "/images/captcha/help.jpg";
+</script>
+</div>
+<?php }echo "<pre>".print_r($this->data,true)."</pre>"; ?>

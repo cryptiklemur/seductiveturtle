@@ -1,0 +1,44 @@
+<!-- Login Form -->
+<form id='login_form' class="clearfix" action="/user/login" method="post">
+	<?php 
+	 if(isset($_REQUEST['demo'])) { ?>
+     Welcome to the Demo User Login. Login with the following credentials.<br /><br />Username: <strong>demo</strong><br />Password: <strong>demouser</strong><?php } ?>
+    <?php $error = !empty($_SESSION['msg']['login-err']) ? $_SESSION['msg']['login-err'] : null; ?><br /><br />
+    <fieldset class='fields login'>
+        <?php 
+        //This will output login errors, if any
+        if ($error) {
+            echo '<div class="err">'.$error.'</div>';
+            unset($error);
+        }
+        ?>
+        <input type="text" name="username" id="username" value="" size="23" />
+        
+        <br /><br />
+        
+        <input type="password" name="password" id="password" size="23" onkeypress="javascript:entersubmit(event)"/>
+        
+        <div class="clear"></div>
+        
+        <br />
+        <div id='login' href='#' onclick='$j("#login_form").submit()' >Login</div>
+    </fieldset>
+</form>
+<script type='text/javascript'>
+window.onload = function() {
+	$('#username').autofill({
+		value: 'Username',
+	 })
+	$('#password').autofill({
+		value: 'Password',
+	 })
+};
+function entersubmit(e){
+
+	var eKey=(e.keyCode ? e.keyCode : e.which);
+	
+	if(eKey==13){
+		$j("#login_form").submit();
+	}
+}
+</script>

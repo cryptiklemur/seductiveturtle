@@ -1,0 +1,217 @@
+<?php
+header('Content-type: text/css');
+$colors = Bootstrap::getDataM('template');
+$body = array();
+$header = array();
+$content = array();
+$footer = array();
+foreach($colors as $color) {
+	if($color->template_section == 'body') {
+		if($color->template_name == 'background')
+			$body['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$body['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$body['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$body['link_hover'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'header') {
+		if($color->template_name == 'color')
+			$header['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$header['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$header['link_hover'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'content') {
+		if($color->template_name == 'background')
+			$content['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$content['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$content['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$content['link_hover'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'footer') {
+		if($color->template_name == 'background')
+			$footer['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$footer['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$footer['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$footer['link_hover'] = stripslashes($color->template_current_value);
+	}
+}
+?>
+
+/*CONTENT*/
+#config					 { margin: 15px 0 0 25px; }
+#content				 {	}
+
+/* ADMIN DASHBOARD */
+#admin_dashboard {margin:0 auto;}
+
+/* LOGS */
+#log_textarea { height:800px; width:720px; }
+
+/* PAGINATION */
+.pagination { width:220px; height:34px; margin:0 auto; margin-top:30px; margin-bottom:30px;}
+.pagination div{ float: left; padding-right: 6px;}
+.previous_button { background: transparent url('/includes/images/left_arrow.png') no-repeat; width:32px; height:32px;}
+.next_button { background: transparent url('/includes/images/right_arrow.png') no-repeat; width:32px; height:32px;}
+.page_active, .disabled { color: chocolate; }
+
+/*RANDOM*/
+
+.vspacer 				{ height: 9px; }
+.vspacer1 				{ height: 13px; }
+.vspacer2 				{ height: 4px; }
+.vspacer3 				{ height: 17px; }
+.vspacer4 				{ height: 40px; }
+.vspacer5 				{ height: 25px; }
+
+
+/*FORM VALIDATION*/
+
+span.status				{ clear:right; height:19px; width:19px; float:left; margin-left:8px; border: 1px solid #ccc; }
+.textareaRequiredState span.status,
+.textfieldRequiredState span.status,
+.textfieldInvalidFormatState span.status,
+.textfieldMinCharsState span.status,
+.textfieldMaxCharsState span.status,
+.selectRequiredState span.status 	{ clear:right; height:19px; width:19px; float:left; margin-left:8px; border: 2px solid #ff0000; }
+.textareaValidState span.status,
+.textfieldValidState span.status,
+.selectValidState span.status 		{ clear:right; height:19px; width:19px; float:left; margin-left:8px; border: 2px solid #00ff00; }
+.label 					{ float:left; font-size:11px; }
+.textareaRequiredState .label,
+.textfieldRequiredState .label,
+.textfieldInvalidFormatState .label,
+.textfieldMinCharsState .label,
+.textfieldMaxCharsState .label,
+.selectRequiredState .label		{ float:left; font-size:11px; color:red; }
+.field 					{ width:235px; margin-right:10px; }
+.hidden_field 				{ width:300px; margin-right:10px; display:none; }
+.input 					{ clear:right; width:235px; float:left; border: 2px solid #ccc; }
+.input2 				{ width: 231px; height: 71px; padding-top: 3px; padding-left: 5px; border: 2px solid #d3d3d3; }
+.textareaRequiredState .input,
+.textfieldRequiredState .input,
+.textfieldInvalidFormatState .input,
+.textfieldMinCharsState .input,
+.textfieldMaxCharsState .input,
+.selectRequiredState .input		{ width:235px; float:left; border:solid 2px red; }
+.textareaRequiredState .input2,
+.textfieldRequiredState .input2,
+.textfieldInvalidFormatState .input2,
+.textfieldMinCharsState .input2,
+.textfieldMaxCharsState .input2,
+.selectRequiredState .input2		{ width:235px; float:left; border:solid 2px red; }
+.combobox 				{ clear:right; width:100px; float:left; }
+.submit 				{ margin-left:12em; }
+.clear 					{ clear:both; visibility:hidden; height:0; width:0; margin: 0; padding: 0; }
+
+.form			 { padding-top: 40px; width:800px; height:auto;}
+.fields			 { border:none; width:inherit; }
+.fields legend		 { display:none; }
+.fields p		 { display:none; }
+.fieldDesc		 { font-size: .8em; color:#525252; }
+.fields label		 { padding: 2px; }
+.fields input	{ height: 25px; width: 170px;  padding: 5px 0 0 5px; margin-bottom: 12px;  padding: 3px; float:right;}
+.fields input:disabled { color: #FFFFFF; background: #999999; }
+.group1 { float:left; width:350px; }
+.group2 { float:right; width:350px; }
+.group3 { clear:both; margin-top:35px; }
+#user_signature-element { clear:both; }
+#content-element { clear:both; }
+
+#admin_dashboard {font-weight: bold;}
+
+.PageeditField1 {float:left; width:350px;}
+.PageeditField2 {float:right; width:350px;}
+.PageeditField3 {clear:both; padding-top:20px; }
+#page_is_controller-label label {margin-right:51px;}
+
+/* CONFIG FORM */
+.configEditField {  }
+.configEditField legend { display:block; font-weight:bold; font-size:1.2em; }
+.configEditField legend h3 { color:#993a3a; padding-bottom: 15px;}
+.configEditField input {  height: 20px; width: 300px;  margin-bottom: 10px;  padding: 3px; float:right; color: #593D2D; } 
+.configEditField input[type="submit"] {  height: 30px; width: 150px;  margin-bottom: 10px;  padding: 6px; float:right; color: #593D2D; background:#DDD;}
+.configEditField input[type="radio"] { margin:3px 7px 0 3px; float:right; height:auto; width:auto; vertical-align:middle; padding-top:3px; border:none; }
+.configEditField select { float:right;  height: 30px; width: 310px;  margin-bottom: 10px; text-align:center; padding-top:2px; background:#DDD; color: #593D2D;} 
+.configEditField option { height: 20px; width: 300px; text-align:center; color: #593D2D; background:#DDD;} 
+.configEditField textarea { margin-bottom: 10px; float:right;  height: 120px; width:300px; padding: 5px 0 0 5px; color: #593D2D; }
+.configEditField #backup__enabled-element { float:right; color: #593D2D; }
+.configEditField #backup__enabled-element label { padding: 3px; color: #593D2D; }
+.configEditField #forum__allow_attachments-element { float:right; color: #593D2D; }
+.configEditField #forum__allow_attachments-element label { padding: 3px; color: #593D2D; }
+.configEditField .configDesc { color: #593D2D; width:100px; height:30px; font-size:.65em; margin-top:30px;}
+
+/* BACKUP AND RESTORE */
+#restoreWrap 					{height:auto;}
+#restoreWrap a					{ text-decoration: none;}
+#restoreWrap a:hover			{ }
+#restoreWrap  h2 				{ margin-left:0px;}
+#backups_header 				{}
+#backups_header ul 				{list-style:none; margin-top:22px;}
+#backups_header li 				{display:inline; padding-right:170px;font-weight:bold;}
+.backup_item					{width:550px;clear:both;margin:18px 0;} 
+.backup_item ul 				{list-style:none; }
+.backup_item li					{display:inline; float:left;}
+.backup_id 						{width:25px; padding-right:170px;}
+.restore_buttons				{ position:absolute; left: 75%;}
+.restore_buttons a				{ text-decoration: none;}
+.restore_buttons a:hover		{ }
+
+/* Login Page */
+#login_form{width:auto;margin:0 auto;padding-top:50px; text-align:center;}
+#login_form h3 { padding-bottom:20px; }
+#login_form input { float:none; margin:0;}
+#login_form input[type='text'] { width:240px; height: 20px; text-align:center;}
+#login_form input[type='password'] { width:240px; height: 20px; text-align:center;}
+#login_form #login { width:72px; height:30px; background: transparent url('/includes/images/login.png') no-repeat; margin:0 auto; }
+#login_form #login:hover { background: transparent url('/includes/images/login_hover.png') no-repeat; }
+/* Template Page */
+#item	{ margin:5px; }
+#item input, #item textarea	{width: 400px; }
+
+/* PAGE MANAGEMENT */
+
+
+/* MENU MANAGEMENT */
+.menuManagement th { padding-bottom:20px; }
+.menuManagement .firstheader { width:140px; padding-left:10px; text-align:left;}
+.td { margin:7px 0;}
+#menu_type { margin:0 auto; width:100px; height:75px;}
+#menu_type select { background:#c9c9c9; padding:6px; margin-top:15px; }
+#backnav { list-style:none; }
+#backnav li { padding: 8px 10px; font-size: 15px; font-weight: bold; text-align:left; }
+
+div[section="menu"] input[type="radio"] { width:30px; }
+div[section="menu"] label[for="visible-1"] { float:right; margin-right:103px; }
+div[section="menu"] label[for="visible-0"] { float:right; }
+div[section="menu"] label[for="type-front"] { float:right; }
+div[section="menu"] label[for="type-admin"] { float:right; margin-right:50px; }
+
+
+/* USER MANAGEMENT */
+
+div#user_admin ul#menu { list-style:none; margin: 16px 0;}
+#search_link {float:right; margin-right:8px;}
+table#list { width: 100%; text-align:center; }
+
+.cms_content input { float:right; width:300px;}
+select[id='user_group_id'] { float:right; width:200px; margin-bottom: 30px;}
+input[name='user_email'] { margin-bottom:30px !important; }
+input[name='user_lastname'] { margin-bottom:30px !important; }
+
+
+/* WCS */
+#wcsTA { float:right; width:300px; height:60px; margin-bottom:10px;}
+#wcs_table { width:500px; cellspacing:0; border-collapse:collapse;}
+#wcs_table tr { margin-bottom: 10px; padding: 10px; min-height:20px;}
+#wcs_table td { margin-bottom: 10px; padding: 10px; }
+.skill { background-color:#fa8282; }

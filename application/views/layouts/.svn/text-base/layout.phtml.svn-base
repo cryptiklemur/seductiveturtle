@@ -1,0 +1,98 @@
+<?php 
+$brow = strtolower(BROWSER);
+$ver = BROWSERV; 
+$menu = ROOT_DIR.'/includes/static/menu.php';
+$user = null;
+$user = Bootstrap::isLogged() ? Bootstrap::getDataS('user','id = "'.Bootstrap::getUser().'"') : null;
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    
+    <meta http-equiv="CACHE-CONTROL" content="PUBLIC" />
+    <meta http-equiv="EXPIRES" content="<?=date('r',time()+60*60*7);?>" />
+    <meta name="keywords" content="<?=$this->metaKeywords?>" />
+    <meta name="description" content="<?=$this->metaDescription?>" />
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="robots" content="all">
+    <title>Seductive Turtle</title>
+    <link href="/css/layout" rel="stylesheet" type="text/css" media="screen" />
+    <?php if(!empty($this->page)) { ?>
+    <link href="/css/<?=$this->page?>" rel="stylesheet" type="text/css" media="screen" />
+    <?php } ?>
+    <link href="/css/custom" rel="stylesheet" type="text/css" media="screen" />
+	<script type='text/javascript'>
+    function addLoadEvent(func) {
+      var oldonload = window.onload;
+      if (typeof window.onload != 'function') {
+        window.onload = func;
+      } else {
+        window.onload = function() {
+          if (oldonload) {
+            oldonload();
+          }
+          func();
+        }
+      }
+    }
+    </script>
+    </head>
+
+
+    <body>
+		<?php /* if(!in_array($brow,array('firefox','chrome','safari')) ) { ?>
+            <div id='browser'>This site is best viewed in Firefox, Chrome, and Safari.</div>
+        <?php } elseif ($brow == 'firefox' && $ver <= 350) { ?> 
+            <div id='browser'>This site is best viewed in Firefox version 3.5 or better.</div>
+        <?php } elseif ($brow == 'safari' && $ver <= 5000) { ?>
+            <div id='browser'>This site is best viewed in Safari version 3 or better.</div>
+        <?php }  */ ?>	
+        <div class='wrap'>
+            <div class='content'>
+                <div class='menu'>
+                	<?php include_once $menu; ?>
+                </div>
+                <div id='header' onclick='window.location.href="/"'>
+                        <span id='seductive'>seductive</span><span id='turtle'>turtle</span>
+                </div>
+                <div id='info'>
+                    <?php echo $this->layout()->content; ?>
+                </div>
+                <div class='clear'></div>
+                <div id='logo' onclick='window.location.href="/"'></div>	
+            </div>
+        </div>
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("jquery", "1.4.1");
+            <?php if($this->admin) echo "google.load('visualization', '1', {packages: ['annotatedtimeline']});" ?> 
+        </script>
+        <script type="text/javascript" >
+            var $j = jQuery.noConflict();
+            google.load('prototype','1.6.1.0');
+        </script>
+        <script type="text/javascript">
+        $j(document).ready(function() {
+            try {
+                var pageTracker = _gat._getTracker("UA-15082163-1");
+                pageTracker._trackPageview();
+            } catch(err) {}
+        });
+        </script>
+        <script type='text/javascript' src='http://www.google-analytics.com/ga.js'></script>
+        <script type="text/javascript" src="/includes/js/global.js"></script>
+        <?php if($this->ck) { ?>
+        <script type="text/javascript" src="/includes/ckeditor/ckeditor.js"></script>
+        <script type='text/javascript'>
+            CKEDITOR.baseHref = 'http://<?=Bootstrap::getConfig("site","url")?>';
+            CKEDITOR.config.bodyId= 'content';
+            CKEDITOR.config.contentsCss= '/css/layout';
+            CKEDITOR.replace('ck_replace',
+             {
+                height:"200", width:"720"
+             });
+        </script>
+        <?php } ?>
+
+    </body>
+</html>

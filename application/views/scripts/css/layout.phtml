@@ -1,0 +1,82 @@
+<?php
+header('Content-type: text/css');
+$colors = Bootstrap::getDataM('template');
+$body = array();
+$header = array();
+$content = array();
+$footer = array();
+foreach($colors as $color) {
+	if($color->template_section == 'body') {
+		if($color->template_name == 'background')
+			$body['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$body['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$body['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$body['link_hover'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'font')
+			$body['font'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'header') {
+		if($color->template_name == 'color')
+			$header['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$header['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$header['link_hover'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'content') {
+		if($color->template_name == 'background')
+			$content['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$content['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$content['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$content['link_hover'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'header')
+			$content['header'] = stripslashes($color->template_current_value);
+	}
+	if($color->template_section == 'footer') {
+		if($color->template_name == 'background')
+			$footer['background'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'color')
+			$footer['color'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a')
+			$footer['link'] = stripslashes($color->template_current_value);
+		if($color->template_name == 'a:hover')
+			$footer['link_hover'] = stripslashes($color->template_current_value);
+	}
+}
+?>
+* { margin:0; padding:0; font-family: '<?=$body['font']?>'; letter-spacing:1px;}
+a { cursor:pointer; text-decoration:none; font-size:1.1em;}
+body {  width:100%; height:100%; background: <?=$body['background']?>; }
+ul { float:right; margin:10px;}
+ul li { padding:10px; display:inline; list-style-type:none; }
+ul li a { color:<?=$header['link']?>; }
+ul li a:hover {color:<?=$header['link_hover']?>; text-decoration:none; }
+.wrap { margin-top:150px; background:<?=$content['background']?>; width:100%; border-top:2px outset #c9c9c9;border-bottom:2px outset #c9c9c9; min-width:1200px; }
+.content {   width:70%; margin:0 auto 30px;}
+#header { padding-top: 50px; font-size:250%; }
+#info { padding:30px 100px; color:<?=$content['color']?>; padding-bottom:100px; min-height:150px;}
+#info a { color:<?=$content['link']?>; }
+#info a:hover { color:<?=$content['link_hover']?>; text-decoration:none;}
+#info p { padding: 10px 0; }
+#seductive { color:<?=$header['link_hover']?>; }
+#turtle { color:<?=$header['link']?>; }
+#logo { float:right; width:230px; margin-top:-80px;height:230px; background: url('/includes/images/logo.png') no-repeat; }
+
+
+
+
+
+
+
+
+
+
+.clear { clear:both; float:none; }
+.left { float:left; }
+.right { float:right; }

@@ -1,0 +1,32 @@
+<?php $users = $this->users; ?>
+<div id='user_admin'>
+	Click on a user to edit them. You can also search for users using the search box to the right.<br />
+    If you would like to add a user, click on the Add a User link.<br /><br />
+	<form id='form_validate' action='/admin/users/' method='get'>
+       	<label for='q'>Search for a user</label>
+    	<input id='q' name='q' type='text' value='<?=$this->q?>' />
+    <div class='clear'></div>
+       	<div class='search_button' onclick='$j("#form_validate").submit()'>&nbsp</div>
+    </form>
+    <div class='clear'></div>
+	<?=$this->paginationControl($users, 'Sliding', 'pagination.phtml')?>
+    <table id='list'>
+    	<tr>
+            <th>Screen Name</th>
+            <th>E-mail</th>
+            <th>Name</th>
+            <th>Position</th>
+        </tr>
+        <?php foreach($users as $user) { ?>
+        <tr id='admin_user' onclick="window.location.href='/user/edit/id/<?=$user->id?>'">
+            <td><?=$user->user_screen_name?></td>
+			<td><?=$user->user_email?></td>
+			<td><?=$user->user_firstname?> <?=$user->user_lastname?></td>
+			<td><?=$user->user_position?></td>
+        </tr>
+        <?php } ?>
+	</table>
+</div>
+
+    <div class='clear'></div>
+<div class='adduser_button' onclick='window.location.href="/user/add"'>&nbsp</div>
