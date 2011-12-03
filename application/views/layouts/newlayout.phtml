@@ -1,0 +1,159 @@
+<?php 
+$brow = strtolower(BROWSER);
+$ver = BROWSERV; 
+$menu = ROOT_DIR.'/includes/static/menu.php';
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="CACHE-CONTROL" content="PUBLIC" />
+		<meta http-equiv="EXPIRES" content="<?=date('r',time()+60*60*7);?>" />
+		<meta name="keywords" content="<?=$this->metaKeywords?>" />
+		<meta name="description" content="<?=$this->metaDescription?>" />
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<meta name="robots" content="all">
+		<title>Seductive Turtle</title>
+		<link href="/css/reset" rel="stylesheet" type="text/css" media="screen" />
+		<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css' />
+		<link href='http://fonts.googleapis.com/css?family=Nobile' rel='stylesheet' type='text/css' />
+		<link href="/css/newlayout" rel="stylesheet" type="text/css" media="screen" />
+		<?php if(!empty($this->page)) { ?>
+		<link href="/css/<?=$this->page?>" rel="stylesheet" type="text/css" media="screen" />
+		<?php } ?>
+		<link href="/css/custom" rel="stylesheet" type="text/css" media="screen" />
+		<script type='text/javascript'>
+		function addLoadEvent(func) {
+		  var oldonload = window.onload;
+		  if (typeof window.onload != 'function') {
+			window.onload = func;
+		  } else {
+			window.onload = function() {
+			  if (oldonload) {
+				oldonload();
+			  }
+			  func();
+			}
+		  }
+		}
+		</script>
+	</head>
+
+
+	<body>
+		<?php 
+		/* if(!in_array($brow,array('firefox','chrome','safari')) ) { ?>
+			<div id='browser'>This site is best viewed in Firefox, Chrome, and Safari.</div>
+		<?php } elseif ($brow == 'firefox' && $ver <= 350) { ?> 
+			<div id='browser'>This site is best viewed in Firefox version 3.5 or better.</div>
+		<?php } elseif ($brow == 'safari' && $ver <= 5000) { ?>
+			<div id='browser'>This site is best viewed in Safari version 3 or better.</div>
+		<?php }  */
+		?>
+		<!-- MAIN WRAPPER -->
+		<div class="main-wrapper">
+		<!-- MAIN CONTAINER -->
+		<div class="container">
+			<!-- HEADER -->
+			<div class="span-6 notopmargin">
+			<span class="logo seductive">seductive</span><span class="logo turtle">Turtle</a>
+		    </div>
+		    <div class="span-18 notopmargin last">
+			<ul class="sf-menu">
+				<?php include_once $menu; ?>
+			</ul>
+		    </div>
+		    <div class="span-24 separator"></div>
+		    <!-- END HEADER -->
+		    <!-- MAIN CONTENT -->
+			<?php echo $this->layout()->content; ?>
+			<div class="span-24 separator-double"></div>
+			<div class="span-24 footer">
+				<div class="span-6 notopmargin">
+				<a href="index.html"><img src="images/logo.png" title="Logo" alt="" /></a>
+			    </div>
+			    <div class="span-6 notopmargin">
+				<div class="icon-white-big icon47-white left"></div>
+				<h6><a class="link">METRIC</a> corporation</h6>
+				<p class="small">Flexible and beautiful HTML template which could be suitable for all kinds of business.</p>
+				<p class="small em">It has modern and minimalist style. Powered by custom jquery scripts.</p>
+			    </div>
+			    <div class="span-6 tweets small notopmargin">
+				<div class="icon-white-big icon101-white left"></div>
+				<h6>Recent tweets</h6>
+				<p class="small"><a href="http://themeforest.net/item/soul-premium-html-template/515212?ref=OrangeIdea" class="link">SOUL - Premium HTML Template</a> already more than 100 sales! Common tet's do 200 sales!</p>
+				<p class="small em">// <a href="http://twitter.com/#!/Orange_Idea_RU" class="link">28 minutes ago</a>. By <a href="http://themeforest.net/user/OrangeIdea/profile?ref=OrangeIdea" class="link">OrangeIdea</a></p>
+			    </div>
+			    <div class="span-6 notopmargin last">
+				<div class="icon-white-big icon193-white left"></div>
+				<h6>Contact info</h6>
+				<p class="small">123456 Street Name, Los Angeles<br/> Phone: <span class="strong">(1800) 765-4321</span></p>
+							<div class="span-6 notopmargin last"><span class="strong em left">Follow us on:</span></div>
+				<div class="tweet-icon">
+				    <a href="index.html" class='social' title='Twitter'><img src="images/1px.png" alt="" width="26px" height="26px" /></a>
+				</div>
+				<div class="facebook-icon">
+				    <a href="index.html" class='social' title='Facebook'><img src="images/1px.png" alt="" width="26px" height="26px" /></a>
+				</div>
+				<div class="google-icon">
+				    <a href="index.html" class='social' title='Google +'><img src="images/1px.png" alt="" width="26px" height="26px" /></a>
+				</div>
+				<div class="vimeo-icon">
+				    <a href="index.html" class='social' title='Vimeo'><img src="images/1px.png" alt="" width="26px" height="26px" /></a>
+				</div>
+				<div class="dribbble-icon">
+				    <a href="index.html" class='social' title='Dribbble'><img src="images/1px.png" alt="" width="26px" height="26px" /></a>
+				</div>
+			    </div>
+			</div>
+		    </div>
+		    <!-- END MAIN CONTENT -->
+		    <div class="clear"></div>
+		</div>
+		<!-- END MAIN CONTAINER -->
+		</div>
+		<!-- END MAIN WRAPPER -->
+	
+		<!--div class='wrap'>
+			<div class='content'>
+				<div class='menu'>
+					<?php //include_once $menu; ?>
+				</div>
+				<div id='header' onclick='window.location.href="/"'>
+						<span id='seductive'>seductive</span><span id='turtle'>turtle</span>
+				</div>
+				<div id='info'>
+					<?php //echo $this->layout()->content; ?>
+				</div>
+				<div class='clear'></div>
+				<div id='logo' onclick='window.location.href="/"'></div>	
+			</div>
+		</div-->
+		<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+		<script type="text/javascript">
+			google.load("jquery", "1");
+			google.load("jqueryui", "1");
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			try {
+				var pageTracker = _gat._getTracker("UA-15082163-1");
+				pageTracker._trackPageview();
+			} catch(err) {}
+		});
+		</script>
+		<script type='text/javascript' src='http://www.google-analytics.com/ga.js'></script>
+		<script type="text/javascript" src="/includes/js/global.js"></script>
+		<?php if($this->ck) { ?>
+		<script type="text/javascript" src="/includes/ckeditor/ckeditor.js"></script>
+		<script type='text/javascript'>
+			CKEDITOR.baseHref = 'http://<?=Bootstrap::getConfig("site","url")?>';
+			CKEDITOR.config.bodyId= 'content';
+			CKEDITOR.config.contentsCss= '/css/layout';
+			CKEDITOR.replace('ck_replace',
+			 {
+				height:"200", width:"720"
+			 });
+		</script>
+		<?php } ?>
+	</body>
+</html>
