@@ -1,5 +1,5 @@
 <!-- Login Form -->
-<form id='login_form' class="clearfix" action="/user/login" method="post">
+<form id='login_form' class="clearfix" action="/user/login/" method="post">
 	<?php 
 	 if(isset($_REQUEST['demo'])) { ?>
      Welcome to the Demo User Login. Login with the following credentials.<br /><br />Username: <strong>demo</strong><br />Password: <strong>demouser</strong><?php } ?>
@@ -21,7 +21,7 @@
         <div class="clear"></div>
         
         <br />
-        <div id='login' href='#' onclick='$j("#login_form").submit()' >Login</div>
+        <div id='login' href='#' onclick='$("#login_form").submit()' >Login</div>
     </fieldset>
 </form>
 <script type='text/javascript'>
@@ -38,7 +38,7 @@ function entersubmit(e){
 	var eKey=(e.keyCode ? e.keyCode : e.which);
 	
 	if(eKey==13){
-		$j("#login_form").submit();
+		$("#login_form").submit();
 	}
 }
 </script>

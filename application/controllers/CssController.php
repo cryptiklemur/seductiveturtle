@@ -8,6 +8,11 @@ class CssController extends Zend_Controller_Action {
 	}
 	public function layoutAction() {
 	}
+
+	public function newlayoutAction() {}	
+
+	public function resetAction() {}
+
 	public function quoteAction() {
 	}
 	public function adminAction() {

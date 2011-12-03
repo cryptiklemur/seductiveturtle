@@ -33,14 +33,12 @@ $custom = Bootstrap::getDataS('template','template_section = "custom"');
 </p>
 <script type='text/javascript'>
 function changeStyle(id, value) {
-	new Ajax.Request('/template/edit/', {
-		method:  'post',
-		parameters: { id : id, value: value },
-		onSuccess: function() {
-			<?php if(Bootstrap::isInGroup('administrator')) { ?>
-			$j('link[href="/css/layout"]').attr('href','/css/layout');
-			<?php } ?>
+	$.post(
+		'/template/edit/',
+		{ id: id, value: value },
+		function(data) {
+			$('link[href="/css/layout"]').attr('href','/css/layout');
 		}
-	});
+	);
 }
 </script><div class='clear'></div>

@@ -5,6 +5,8 @@ class IndexController extends Zend_Controller_Action {
 	}
 
 	public function indexAction() {
+		if($_SERVER['REMOTE_ADDR'] == '76.88.61.48')
+			$this->_helper->layout->setLayout('newlayout');
 		// Grab the URI after "http://www.DOMAIN.com"
 		$server_uri = $_SERVER['REQUEST_URI'];
 		// If we are at the index (homepage) of the site:

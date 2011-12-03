@@ -13,169 +13,15 @@ class UserController extends Zend_Controller_Action
 		$this->view->admin = true;
 		$this->view->page = 'admin';
 	}
-	public function registerAction() {
-		$this->_redirect('/');
-		$form=new Default_Form_Register();
-		$form->setAction('/user/register');
-
-		if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
-			$data = array();
-			// Get all data when the form is submitted
-
-			// Encode password
-			$md5_password = md5($this->_request->getPost('password'));
-			$data['user_password']=$md5_password;
-
-			$data['user_screen_name']=$this->_request->getPost('screenname');
-			$data['user_email']=$this->_request->getPost('email');
-			$data['user_firstname']=$this->_request->getPost('user_firstName');
-			$data['user_lastname']=$this->_request->getPost('user_lastName');
-			$data['user_city']=$this->_request->getPost('user_city');
-			$data['user_state']=$this->_request->getPost('user_state');
-			$data['user_zip']=$this->_request->getPost('user_zip');
-			$data['user_phone']=$this->_request->getPost('user_phone');
-			$data['user_country']=$this->_request->getPost('user_country');
-
-			// Pass the new values and update the DB
-			$user=new Default_Model_Db('user');
-			$user->save($data);
-
-			//$this->_redirect("/");
-			$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-			//$this->_redirect($referer);
-
-		} else {
-			$form->getElement('screenname')->setValue($this->_request->getPost('username'));
-			$form->getElement('email')->setValue($this->_request->getPost('email'));
-
-			$this->view->form=$form;
-		}
-	}
-
-	public function quoteregisterAction() {
-		$this->_redirect('/');
-		$this->view->page = 'quote';
-		$this->view->pageTitle = "Request a Quote";
-		$form = new Default_Form_Quote_Register();
-		$form->setAction('/user/quoteregister');
-
-		if ($this->_request->isPost() && $form->isValid($this->_request->getPost())) {
-			$data = array();
-			// Get all data when the form is submitted
-				
-			// Generate random password
-			$length = rand(5,9); $strength = 8;
-			$vowels = 'aeiouy';
-			$consonants = 'bdghjmnpqrstvz';
-			if ($strength & 1) {
-				$consonants .= 'BDGHJLMNPQRSTVWXZ';
-			}
-			if ($strength & 2) {
-				$vowels .= "AEIOUY";
-			}
-			if ($strength & 4) {
-				$consonants .= '23456789';
-			}
-			if ($strength & 8) {
-				$consonants .= '@#$%';
-			}
-				
-			$password = '';
-			$alt = time() % 2;
-			for ($i = 0; $i < $length; $i++) {
-				if ($alt == 1) {
-					$password .= $consonants[(rand() % strlen($consonants))];
-					$alt = 0;
-				} else {
-					$password .= $vowels[(rand() % strlen($vowels))];
-					$alt = 1;
-				}
-			}
-				
-			$md5_password = md5($password);
-			$data['user_password']=$md5_password;
-				
-			$data['user_screen_name']=$this->_request->getPost('email');
-			$data['user_email']=$this->_request->getPost('email');
-			$data['user_firstname']=$this->_request->getPost('firstname');
-			$data['user_lastname']=$this->_request->getPost('lastname');
-			$data['user_register']=1;
-			$data['user_group_id']=3;
-				
-			// Pass the new values and update the DB
-			$user=new Default_Model_Db('user');
-			$user->save($data);
-				
-			$quote = new Default_Model_Db('quote_full');
-			$quoteData['quote_user'] = Bootstrap::getDataS('user','user_email = "'.$data['user_email'].'"')->id;
-			$quoteData['quote_started_time'] = time();
-			$quoteData['quote_min_price'] = Bootstrap::getConfig('quote','base_price');
-			$quoteData['quote_avg_price'] = Bootstrap::getConfig('quote','base_price');
-			$quoteData['quote_monthly_price'] = 0;
-			$quote->save($quoteData);
-			
-			// Email password to the new user:
-			$message = "
-Hi ".$data['user_firstname'].", thanks for using our online quote estimate tool! Please reply and tell us what you thought of the experience.
-
-Here is your password so you can review your quote and make changes at any time:
-
-	Password: ".$password."
-
-Have a great day,
-
-Account Creation Team,
-Galactic Edge - http://www.galacticedge.com";
-			
-			$send_from_name= "Galactic Edge Account Creation Team";;
-			$send_from_email="info@galacticedge.com";
-			$header="From: $_name <$email>\r\n";
-
-			//$params = "-oi -f $send_from_email";
-			$params = "-f $email";
-
-			$recipient=$data['user_email'];
-
-			$emailSmtpConf = array(
-                    'auth' => 'login',
-                    'ssl' => 'ssl',
-                    'username' => 'info@galacticedge.com',
-                    'password' => 'sld6Nzqq!'
-                    );
-
-            $transport = new Zend_Mail_Transport_Smtp('secure.emailsrvr.com', $emailSmtpConf);
-
-            $mail = new Zend_Mail();
-            $mail->setFrom( $send_from_email, $send_from_name);
-            $mail->addTo($recipient, $data['firstname']." ".$data['lastname']);
-            $mail->setSubject('Galactic Edge New Account Information');
-    		$mail->setBodyText($message);
-    		$mail->send($transport);//*/
-		
-    		$transport->__destruct();
-				
-			$this->view->email = $data['user_email'];
-			$this->view->password = $password;
-		} else {
-			$this->view->form=$form;
-		}
-	}
 
 	public function loginAction() {
-	 /*
-	  * Dev Note:
-	  *
-	  * acl_user_register: 0=disabled, 1=enabled,
-	  * else they need to register
-	  *
-	  */
-	  
 	  	$this->view->pageTitle = "Login";
-
 		$auth = Zend_Auth::getInstance();
 		if ($this->_request->isPost()) {
-			$username=$this->_request->getPost('username');
-			$password=$this->_request->getPost('password');
+
+
+			$username=$this->_request->getParam('username');
+			$password=$this->_request->getParam('password');
 			$user_table=new Default_Model_Db('user');
 			$db=$user_table->getAdapter();
 			$adapter = new Zend_Auth_Adapter_DbTable($db);
@@ -185,15 +31,14 @@ Galactic Edge - http://www.galacticedge.com";
 
 			$adapter->setIdentity($username)
 			->setCredential(md5($password));
-
 			$result = $auth->authenticate($adapter);
 			/*For Email Validation*/
 			$row=$adapter->getResultRowObject();
 			$userRow = Bootstrap::getDataS('user',"user_screen_name = '$username'");
-			if (isset($userRow)) {
+			if (!empty($userRow)) {
 				$confirmKey=$userRow->user_register;
-				if ('1' == $confirmKey) {
-					if ($result->isValid()) {
+				if ($confirmKey == '1') {
+					if ($userRow['user_password'] == md5($password)) { //$result->isValid()) {
 						$row=$adapter->getResultRowObject();
 						$groupIds=explode(',',$row->user_group_id);
 						$groups = array();
@@ -213,12 +58,8 @@ Galactic Edge - http://www.galacticedge.com";
 						$storage = new Zend_Auth_Storage_Session();
 						$storage->write($adapter->getResultRowObject());
 
-						if(Bootstrap::isInGroup('company')) {
-							$this->_redirect("/quote/full");
-						}
-						
 						$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
-						$this->_redirect("/admin");
+						//$this->_redirect("/admin");
 						
 					}//*/
 				} else {
@@ -232,6 +73,8 @@ Galactic Edge - http://www.galacticedge.com";
 			}
 
 		}
+		else
+			unset($_SESSION);
 	}
 
 	public function indexAction() {
