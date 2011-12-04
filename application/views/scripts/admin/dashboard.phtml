@@ -1,3 +1,26 @@
+<script type='text/javascript'>
+	jQuery(function() {
+		jQuery.post(
+			'/admin/config/',
+			function(data) {
+				jQuery('#config').html(data);
+				(function($) {
+					$(function() {
+						$('ul.tabs').delegate('li:not(.current)', 'click', function() {
+							$(this).addClass('current').siblings().removeClass('current')
+							.parents('div.section').find('div.box').hide().eq($(this).index()).fadeIn(150);
+						})
+					})
+				})(jQuery)
+			}
+		);
+	});
+</script>
+<div class="clearfix clear"></div>
+<div id="config" style="padding: 20px 5px;"></div>
+<div class="span-24 separator-double"></div>
+<div class="clearfix clear"></div>
+<br />
 <?php
 if(class_exists('GoogleAnalytics')) {
 $visits = $this->visits;
@@ -38,25 +61,10 @@ addLoadEvent(function() {
 	?>
 	var annotatedtimeline = new google.visualization.AnnotatedTimeLine(document.getElementById('ga'));
 	annotatedtimeline.draw(data, {allowRedraw: true});
-	$j('#ga').css('height','475px');
+	jQuery('#ga').css('height','475px');
 	
 	
 });
 </script>
-<?php }
-if(Bootstrap::isInGroup('administrator')) { ?>
-<script type='text/javascript'>
-	addLoadEvent(function() {
-		new Ajax.Updater('config','/admin/config');
-	});
-</script>
 <?php } ?>
-<div id="admin_dashboard">
-	<?php 
-	if(Bootstrap::isInGroup('administrator')) { ?>
-		<a href="#" onclick="$j('#config').toggle('slow');" >Site Configuration</a> <br />
-		<div id="config" style="display:none;"></div>
-    <?php } ?>
-<br />
-<div id="ga" style='width: 720px; height:500px;'></div><br /><br />
-</div>
+<div id="ga" style='width: 940px; height:500px;'></div><br /><br />

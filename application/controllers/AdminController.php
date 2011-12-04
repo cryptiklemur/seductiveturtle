@@ -2,35 +2,27 @@
 
 class AdminController extends Zend_Controller_Action {
 
-	public function init() {
-
-		// At this time ONLY users with admin permissions may use this file
-		if (! Bootstrap::isInGroup('administrator') && !Bootstrap::isInGroup('demo')) {
+	public function init()
+	{
+		if (! Bootstrap::isInGroup('administrator')) {
 			$this->_redirect('/user/login');
 		}
 		$this->view->pageTitle = "Admin Panel";
 		$this->view->admin = true;
 		$this->view->page = 'admin';
-		//*/
-
 	}
 
-	public function indexAction() {
-
+	public function indexAction()
+	{
 		$this->_redirect("/admin/dashboard");
 	}
-	public function businessAction(){
-		$this->_redirect('/business/index');	
-	}
+
 	public function dashboardAction() {
 		// @todo add analytics functionity and a better menu
 		// This is out management portal, and will be the same for our clients
-		@include Bootstrap::getConfig('site','base_dir').'/includes/google_api/googleanalytics.class.php';
-
-
+		include Bootstrap::getConfig('site','base_dir').'/includes/google_api/googleanalytics.class.php';
 
 		// enter your login, password and id into the variables below to try it out
-
 		$login = Bootstrap::getConfig('analytics','username');
 		$password = Bootstrap::getConfig('analytics','password');
 		$id=Bootstrap::getConfig('analytics','profile_id');
@@ -42,7 +34,6 @@ class AdminController extends Zend_Controller_Action {
 		// if you don't specify an id here, then you'll get the "Badly formatted request to the Google Analytics API..." error message
 
 	
-		// submission? 
 		// retrieve information from google analytics 
 		$stringVisits = '';
 		$stringViews = '';
@@ -72,12 +63,10 @@ class AdminController extends Zend_Controller_Action {
 		
 
 	}
-	public function gaAction() {
-        $this->_helper->layout->disableLayout();
-		
+	public function gaAction()
+	{
+		$this->_helper->layout->disableLayout();
 	}
-
-	/* PAGE CMS FUNCTION */
 
 	public function newpageAction() {
 		$this->view->ck = true;
