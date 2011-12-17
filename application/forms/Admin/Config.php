@@ -103,7 +103,7 @@ class Default_Form_Admin_Config extends Zend_Form {
                 }
         }
         $submit = new Zend_Form_Element_Submit('submit');
-        $submit->setLabel('Submit');
+        $submit->setLabel('Submit')->setAttrib('class', 'button');;
         $this->addElement($submit);
         
     	foreach($this->getElements() as $element) {

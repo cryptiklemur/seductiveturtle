@@ -15,7 +15,12 @@ class UserController extends Zend_Controller_Action
 	}
 
 	public function loginAction() {
-	  	$this->view->pageTitle = "Login";
+		if(Bootstrap::isLogged())
+		{
+			$this->_redirect('/admin/dashboard/');
+	  		die('Redirect');
+		}
+		$this->view->pageTitle = "Login";
 		$auth = Zend_Auth::getInstance();
 		if ($this->_request->isPost()) {
 
@@ -60,7 +65,7 @@ class UserController extends Zend_Controller_Action
 
 						$referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '/';
 						//$this->_redirect("/admin");
-						
+						die($referer);
 					}//*/
 				} else {
 					//can have another if here for

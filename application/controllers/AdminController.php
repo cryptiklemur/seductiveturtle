@@ -2,35 +2,27 @@
 
 class AdminController extends Zend_Controller_Action {
 
-	public function init() {
-
-		// At this time ONLY users with admin permissions may use this file
-		if (! Bootstrap::isInGroup('administrator') && !Bootstrap::isInGroup('demo')) {
+	public function init()
+	{
+		if (! Bootstrap::isInGroup('administrator')) {
 			$this->_redirect('/user/login');
 		}
 		$this->view->pageTitle = "Admin Panel";
 		$this->view->admin = true;
 		$this->view->page = 'admin';
-		//*/
-
 	}
 
-	public function indexAction() {
-
+	public function indexAction()
+	{
 		$this->_redirect("/admin/dashboard");
 	}
-	public function businessAction(){
-		$this->_redirect('/business/index');	
-	}
+
 	public function dashboardAction() {
 		// @todo add analytics functionity and a better menu
 		// This is out management portal, and will be the same for our clients
-		@include Bootstrap::getConfig('site','base_dir').'/includes/google_api/googleanalytics.class.php';
-
-
+		include Bootstrap::getConfig('site','base_dir').'/includes/google_api/googleanalytics.class.php';
 
 		// enter your login, password and id into the variables below to try it out
-
 		$login = Bootstrap::getConfig('analytics','username');
 		$password = Bootstrap::getConfig('analytics','password');
 		$id=Bootstrap::getConfig('analytics','profile_id');
@@ -42,7 +34,6 @@ class AdminController extends Zend_Controller_Action {
 		// if you don't specify an id here, then you'll get the "Badly formatted request to the Google Analytics API..." error message
 
 	
-		// submission? 
 		// retrieve information from google analytics 
 		$stringVisits = '';
 		$stringViews = '';
@@ -72,12 +63,10 @@ class AdminController extends Zend_Controller_Action {
 		
 
 	}
-	public function gaAction() {
-        $this->_helper->layout->disableLayout();
-		
+	public function gaAction()
+	{
+		$this->_helper->layout->disableLayout();
 	}
-
-	/* PAGE CMS FUNCTION */
 
 	public function newpageAction() {
 		$this->view->ck = true;
@@ -120,7 +109,6 @@ class AdminController extends Zend_Controller_Action {
 				$data2 = Bootstrap::getDataS('page','id = '.$data['id']);
 				$data2 = $data2->toArray();
 				foreach($data2 as $key=>$value) { $data['_origData'][$key] = $value; }
-				$data['_origData']['backup_preview'] = $data2['page_content'];
 
 				$user=new Default_Model_Db('page');
 				$user->save($data);
@@ -152,9 +140,6 @@ class AdminController extends Zend_Controller_Action {
 				$pageForm->getElement('page_update_time')->setValue($content->page_update_time);
 
 				$this->view->pageForm=$pageForm;
-
-				$backups = Bootstrap::getDataM('backup','backup_id = '.$page_id.' AND backup_revision > '.Bootstrap::getConfig('backup','keep_record'),'backup_revision DESC');
-				$this->view->backups = $backups;
 			}
 		}
 		else {
@@ -175,27 +160,13 @@ class AdminController extends Zend_Controller_Action {
 	}
 
 	/* IMAGE CMS FUNCTIONS */
-
-	public function newimageAction() {
-		echo "This is for adding images!";
-	}
-
-	public function imagesAction() {
-		echo "This is for managing images!";
-	}
-
-	public function deleteimageAction() {
-		echo "This is for deleting images!";
-	}
 	public function configAction() {
 
 		// CMS layout to integrate FCKeditor and pull content to appear like the live site
 		//$this->_helper->layout->setLayout("layout-admin");
-        $this->_helper->layout->disableLayout();
-
+		$this->_helper->layout->disableLayout();
 		$pageForm = new Default_Form_Admin_Config();
 		$pageForm->setAction("/admin/configsave");
-
 		$this->view->pageForm=$pageForm;
 
 	}
@@ -211,7 +182,6 @@ class AdminController extends Zend_Controller_Action {
 				$element = explode('__',$key);
 				$data[$element[0]][$element[1]] = $value;
 				if($element[1] == 'password' && strlen($value) < 1) unset($data[$element[0]][$element[1]]);
-				if($key == 'business__password') $data[$element[0]][$element[1]] = md5($value);
 			}
 			$config = new Default_Model_Config();
 			$config->save($data);
@@ -226,6 +196,7 @@ class AdminController extends Zend_Controller_Action {
 		$this->view->users = $paginator;
 		$this->view->q = $q;
 	}
+
 	public function licenseAction() {
 		$sites = ""; 
 	}

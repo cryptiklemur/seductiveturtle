@@ -1,36 +1,34 @@
 <?php $query = isset($_COOKIE['search']) ? $_COOKIE['search'] : '';?>
-<div class="pagination">
-        
-        <?php if (isset($this->previous)): ?>
-              <div class="page"><a href="<?= $this->url(array('page' => $this->first, 'q' => $query)); ?>">First</a></div>
-        <?php else: ?>
-                <div class="disabled">First</div>
-        <?php endif; ?>        
-    
-        <?php if (isset($this->previous)): ?>
-              <a href="<?= $this->url(array('page' => $this->previous, 'q' => $query)); ?>"><div class="previous_button"></div></a> 
-        <?php else: ?>
-            <div class="disabled previous_button"></div>
-        <?php endif; ?>        
-        
-        <?php foreach ($this->pagesInRange as $page): ?>
-            <?php if ($page != $this->current): ?>
-                <div class="page"><a href="<?= $this->url(array('page' => $page, 'q' => $query)); ?>"><?= $page; ?></a></div>
-            <?php else: ?>
-               <div class="page_active"> <?= $page; ?></div>
-            <?php endif; ?>
-        <?php endforeach; ?>        
-        
-        <?php if (isset($this->next)): ?>
-             <a href="<?= $this->url(array('page' => $this->next, 'q' => $query)); ?>"><div class="next_button"></div></a>
-        <?php else: ?>
-            <div class="disabled next_button"></div>
-        <?php endif; ?>        
-        
-        <?php if (isset($this->next)): ?>
-              <div class="page"><a href="<?= $this->url(array('page' => $this->last, 'q' => $query)); ?>">Last</a></div>
-        <?php else: ?>
-            <div class="disabled">Last</div>
-        <?php endif; ?>
- 
- </div>
+<ul class="pagination">
+	<?php if (isset($this->previous)): ?>
+		<li class="page"><a class="" href="<?=$this->url(array('page' => $this->first, 'q' => $query));?>">First</a></li>
+	<?php else: ?>
+		<li class="disabled"><a class="">First</a></li>
+	<?php endif; ?>	
+	
+	<?php if (isset($this->previous)): ?>
+		<li><a class="" href="<?= $this->url(array('page' => $this->previous, 'q' => $query)); ?>">Prev</a></li>
+	<?php else: ?>
+		<li class="disabled"><a class="">Prev</a></li>
+	<?php endif; ?>	
+	
+	<?php foreach ($this->pagesInRange as $page): ?>
+		<?php if ($page != $this->current): ?>
+		<li class="page"><a class="" href="<?=$this->url(array('page' => $page, 'q' => $query))?>"><?=$page?></a></li>
+		<?php else: ?>
+		<li class="page_active disabled"><a class=""><?=$page;?></a></li>
+		<?php endif; ?>
+	<?php endforeach; ?>	
+	
+	<?php if (isset($this->next)): ?>
+		<li><a class="" href="<?=$this->url(array('page' => $this->next, 'q' => $query))?>">Next</a></li>
+	<?php else: ?>
+		<li class="disabled"><a class="">Next</a></li>
+	<?php endif; ?>	
+	
+	<?php if (isset($this->next)): ?>
+		<li class="page"><a class="" href="<?=$this->url(array('page' => $this->last, 'q' => $query))?>">Last</a></li>
+	<?php else: ?>
+		<li class="disabled"><a class="">Last</a></li>
+	<?php endif; ?>
+</ul>

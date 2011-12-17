@@ -21,26 +21,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Session::setOptions($config);
 
 	}
-	public static function backup($data) {
-		if(Bootstrap::getConfig('backup','keep_record') > 0) {
-			$backup = new Default_Model_Db('backup');
-			$dataSave = array();
-			$dataSave['backup_class'] = $data['class'];
-			$dataSave['backup_id'] = $data['id'];
-			$dataSave['backup_revision'] = time();
-			$sql = '';
-			foreach($data as $key=>$value) {
-				if($key != 'backup_preview' && $key != 'class') {
-					$sql .= "'".$value."',\n";
-				}
-			}
-			$sql = substr($sql,0,-2);
-			$dataSave['backup_sql']  = "DELETE FROM ".$data['class']." WHERE id=".$data['id'].";\n";
-			$dataSave['backup_sql'] .= "INSERT INTO " . $data['class'] . "\n VALUES (".$sql.");";
-			$dataSave['backup_preview'] = $data['backup_preview'];
-			$backup->save($dataSave);
-		}
-	}
+	
 	public static function loadConfig() {
 		$configData = Bootstrap::getDataM('config');
 		foreach($configData as $value) {
@@ -77,9 +58,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$data['config_current_value'] = $value;
 		$config->save($data);
 	}
-	public static function printSession() {
-		echo "<pre>".print_r($_SESSION,true)."</pre>";
-	}
+	
 	public static function getDataS($var, $where = null, $key = 'id', $log=false) {
 		$model = new Default_Model_Db($var,$key);
 		$select = new Zend_Db_Table_Select($model);
@@ -87,6 +66,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		if($log) Bootstrap::log($select->__ToString());
 		return $model->fetchRow($select);
 	}
+	
 	public static function getDataM($var, $where = null, $order = null, $key = 'id', $log=false) {
 		$model = new Default_Model_Db($var,$key);
 		$select = new Zend_Db_Table_Select($model);
@@ -142,6 +122,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		}
 		return $_SESSION['user_id'];
 	}
+
 	public static function parseHost($serverName) {
 
 		$return_data=array("a"=>null,"b"=>null,"c"=>null);
@@ -161,21 +142,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$return_data['a']=substr($serverName,0,$firstDot);
 		return $return_data;
 	}
+
 	public static function log($content) {
 		if(!is_string($content)) return Default_Model_Logger::log(print_r($content,true));
 		return Default_Model_Logger::log($content);
 	}
-	public static function fbLog($content,$level = 'info') {
-		$writer = new Zend_Log_Writer_Firebug();
-		$logger = new Zend_Log($writer);
 
-		if($level == 'table') {
-			$writer->setPriorityStyle(8,'TABLE');
-			$logger->addPriority('TABLE',8);
-		}
-
-		$logger->$level($content);
-	}
 	public static function smart_trim($text, $max_len, $trim_middle = false, $trim_chars = '...')
 	{
 		$text = trim($text);
