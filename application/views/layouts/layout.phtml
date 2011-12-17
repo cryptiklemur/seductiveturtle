@@ -89,8 +89,13 @@ $menu = ROOT_DIR.'/includes/static/menu.php';
 			    <div class="span-6 tweets small notopmargin">
 				<div class="icon-white-big icon101-white left"></div>
 				<h6>Recent tweets</h6>
-				<p class="small"></p>
-				<p class="small em"></p>
+				<?php
+				$username='seductiveturtle'; // set user name
+				$format='json'; // set format
+				$tweet=json_decode(file_get_contents("http://api.twitter.com/1/statuses/user_timeline/{$username}.{$format}")); // get tweets and decode them into a variable
+				?>
+				<p class="small"><?=$tweet[0]->text?></p>
+				<p class="small em">Created on <?=date("M d, Y h:i:sa", strtotime($tweet[0]->created_at))?></p>
 			    </div>
 			    <div class="span-6 notopmargin last">
 				<div class="icon-white-big icon193-white left"></div>
@@ -137,17 +142,19 @@ $menu = ROOT_DIR.'/includes/static/menu.php';
 		<script type="text/javascript" src="/includes/js/kwicks/jquery.kwicks-1.5.1.pack.js"></script>
 		<script type="text/javascript" src="/includes/js/mosaic/mosaic.1.0.1.js"></script>
 		<script type="text/javascript" src="/includes/js/jquery.tipsy.js"></script>
-		<script type="text/javascript" src="/includes/js/jquery.quicksand.js"></script>
 		<script type="text/javascript" src="/includes/js/jquery.tablesorter.js"></script>
 		<?php if($this->ck) { ?>
 		<script type="text/javascript" src="/includes/ckeditor/ckeditor.js"></script>
 		<script type='text/javascript'>
 			CKEDITOR.baseHref = 'http://<?=Bootstrap::getConfig("site","url")?>';
 			CKEDITOR.config.bodyId= 'content';
-			CKEDITOR.config.contentsCss= '/css/layout';
+			CKEDITOR.config.contentsCss= '/css/layout/';
+			CKEDITOR.config.enableTabKeyTools=true;
+			CKEDITOR.config.fullPage=true;
+			CKEDITOR.config.startupMode = 'source';
 			CKEDITOR.replace('ck_replace',
 			 {
-				height:"200", width:"720"
+				height:"500", width:"920"
 			 });
 		</script>
 		<?php } ?>

@@ -18,7 +18,6 @@ class Default_Model_Db extends Zend_Db_Table_Abstract {
 			if (isset($this->_primary) && isset($this->_data[$this->_primary])) {
 				if(isset($this->_data['_origData'])) {
 					$this->_data['_origData']['class'] = $this->_name;
-					Bootstrap::backup($this->_data['_origData']);
 					unset($this->_data['_origData']);
 				}
 				return parent::update( $this->_data, array( $this->_primary . " = ?" => $this->_data[$this->_primary] ) );

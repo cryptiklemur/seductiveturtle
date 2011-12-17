@@ -67,32 +67,4 @@ $_f = $this->pageForm;
 	<div class="save_button" onclick="jQuery('form').submit()">Save</div>
 		<div class="clear"></div>
 </form>
-<?php }
-
-if($backups = $this->backups) {
-	if(count($backups->toArray()) > 0) {
-		$url = 'http://'.Bootstrap::getConfig('site','url');
-?>
-
-	<div id="restoreWrap">
-		<h2>Restore from a backup:</h2><br />
-		<p>The following backups are sorted with the most recent at the top. To restore simply click on the time and it will be automatically recovered.</p>
-			
-			<div id="backups_header">
-				<ul>
-					<li>I.D.</li>
-					<li>Time</li>	
-				</ul>
-			</div>
-			
-			<?php foreach($backups as $item) { 
-					$preview = strip_tags(str_replace(array("'",'"'),'',$item->backup_preview));
-			?>
-						<ul class="backup_item">
-							<li class="backup_id"><a id='backups_<?=$item->id?>'><?=$item->id?></a></li>
-							<li><a href="<?=$url?>/backup/preview/id/<?=$item->id?>"><?=date('g:i:s a - M j, Y',$item->backup_revision)?></a></li>
-						</ul>
-			<?php } ?>
-	</div> <br /><?php			
-	} 
-} ?>
+<?php } ?>
